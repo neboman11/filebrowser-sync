@@ -1,6 +1,6 @@
 module fbsync
 
-go 1.27.1
+go 1.23
 
 require (
 	fyne.io/systray v1.12.2
