@@ -63,7 +63,9 @@ func renderIcon(kind iconKind, rot float64) []byte {
 		}
 	}
 	var buf bytes.Buffer
-	png.Encode(&buf, img)
+	if err := png.Encode(&buf, img); err != nil {
+		return nil
+	}
 	if runtime.GOOS == "windows" {
 		return wrapICO(buf.Bytes())
 	}
@@ -116,7 +118,7 @@ func wrapICO(pngData []byte) []byte {
 	b.Write([]byte{iconSize, iconSize, 0, 0})
 	binary.Write(&b, binary.LittleEndian, [2]uint16{1, 32})
 	binary.Write(&b, binary.LittleEndian, [2]uint32{uint32(len(pngData)), 22})
-	b.Write(pngData)
+	_, _ = b.Write(pngData)
 	return b.Bytes()
 }
 

@@ -40,7 +40,7 @@ func main() {
 	cfgPath := fl.String("config", defaultConfigPath(), "config file")
 	verbose := fl.Bool("v", false, "verbose logging")
 	fl.Usage = func() { fmt.Fprintf(os.Stderr, usage, defaultConfigPath(), logFilePath()) }
-	fl.Parse(os.Args[1:])
+	_ = fl.Parse(os.Args[1:])
 	if fl.NArg() == 0 {
 		fl.Usage()
 		os.Exit(2)
@@ -78,7 +78,7 @@ func openLogFile(path string) (*os.File, error) {
 		return nil, err
 	}
 	if fi, err := os.Stat(path); err == nil && fi.Size() > maxLogSize {
-		os.Rename(path, path+".1")
+		_ = os.Rename(path, path+".1")
 	}
 	return os.OpenFile(path, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0o600)
 }
@@ -134,7 +134,7 @@ func dispatch(ctx context.Context, log *slog.Logger, cfgPath, cmd string, args [
 		fs := flag.NewFlagSet("once", flag.ExitOnError)
 		resync := fs.Bool("resync", false, "re-establish baseline (merge, newer wins, no deletions)")
 		force := fs.Bool("force", false, "apply deletions of more than half a folder (two-way only)")
-		fs.Parse(args)
+		_ = fs.Parse(args)
 		folders, err := selectFolders(cfg, fs.Args())
 		if err != nil {
 			return err

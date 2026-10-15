@@ -183,7 +183,7 @@ func (r *Rclone) run(ctx context.Context, f *Folder, args ...string) (SyncResult
 			}
 			r.log.Log(ctx, level, line, "folder", f.Name)
 		}
-		io.Copy(io.Discard, pr) // keep draining if a line exceeded the buffer
+		_, _ = io.Copy(io.Discard, pr) // keep draining if a line exceeded the buffer
 		done <- res
 	}()
 
