@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=fbsync
+GenericName=Folder Sync
+Comment=Keep folders in sync with FileBrowser
+Exec=@BIN@ tray
+Icon=folder-sync
+Terminal=false
+Categories=Network;FileTransfer;
+StartupNotify=false
+X-GNOME-Autostart-enabled=true

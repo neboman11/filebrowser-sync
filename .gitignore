@@ -1,0 +1,35 @@
+# Binaries
+/fbsync
+/fbsync.exe
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Build artifacts
+dist/
+build/
+
+# Dependencies
+vendor/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Local config (contains secrets)
+config.yaml
+token
+
+# State and logs
+.local/state/fbsync/
+*.log
+*.log.*
+
+# Test coverage
+*.cover
+coverage.out

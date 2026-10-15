@@ -1,0 +1,17 @@
+[Unit]
+Description=fbsync - FileBrowser Quantum folder sync
+Documentation=file://%h/.config/fbsync/config.yaml
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/fbsync run
+Restart=on-failure
+RestartSec=30
+# rclone does the work; keep sync from competing with interactive use.
+Nice=10
+IOSchedulingClass=idle
+
+[Install]
+WantedBy=default.target

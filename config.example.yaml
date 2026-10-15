@@ -1,0 +1,50 @@
+# fbsync configuration. Copy to ~/.config/fbsync/config.yaml
+
+# FileBrowser Quantum base URL (same origin you use in the browser).
+server: https://filebrowser.nesbitt.rocks
+# FileBrowser source name; WebDAV lives at <server>/dav/<source>/.
+source: data
+
+# File containing a *minimal* (non-customized) API token from
+# Settings -> API Tokens. Alternatively set FBSYNC_TOKEN in the environment.
+token_file: ~/.config/fbsync/token
+
+# How often to poll the server for changes made elsewhere (web UI, other PCs).
+# Local changes are picked up immediately by a file watcher.
+interval: 5m
+# Wait this long after the last local change before syncing (lets saves finish).
+debounce: 5s
+
+# Optional: path to rclone (>= 1.66) if it is not on PATH.
+# rclone: /usr/bin/rclone
+
+# Optional: where sync state lives (default ~/.local/state/fbsync).
+# state_dir: ~/.local/state/fbsync
+
+# rclone filter patterns that are never synced. Setting this replaces the
+# defaults shown here. Changing it re-runs a baseline (merge) sync.
+# exclude:
+#   - ".~lock.*#"
+#   - "~$*"
+#   - "*.tmp"
+#   - "*.part"
+#   - "*.crdownload"
+#   - ".DS_Store"
+#   - "Thumbs.db"
+#   - "desktop.ini"
+
+folders:
+  # Two-way, like OneDrive: edits, new files and deletions flow in both
+  # directions. Conflicting edits keep the newer copy; the other is saved
+  # next to it as <name>.conflict1.
+  - name: documents
+    local: ~/Documents
+    remote: Documents        # path inside the source; created if missing
+    mode: two-way
+
+  # Upload only: new and changed local files are pushed to the server.
+  # Nothing is ever deleted on the server and nothing is downloaded.
+  - name: phone-photos
+    local: ~/Pictures/Camera
+    remote: Photos/Camera
+    mode: upload
