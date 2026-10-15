@@ -115,7 +115,7 @@ func inTriangle(x, y float64, a, b, c [2]float64) bool {
 func wrapICO(pngData []byte) []byte {
 	var b bytes.Buffer
 	_ = binary.Write(&b, binary.LittleEndian, [3]uint16{0, 1, 1})
-	_ = b.Write([]byte{iconSize, iconSize, 0, 0})
+	_, _ = b.Write([]byte{iconSize, iconSize, 0, 0})
 	_ = binary.Write(&b, binary.LittleEndian, [2]uint16{1, 32})
 	_ = binary.Write(&b, binary.LittleEndian, [2]uint32{uint32(len(pngData)), 22})
 	_, _ = b.Write(pngData)
