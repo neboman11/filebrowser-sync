@@ -1,7 +1,7 @@
 # fbsync configuration. Copy to ~/.config/fbsync/config.yaml
 
 # FileBrowser Quantum base URL (same origin you use in the browser).
-server: https://filebrowser.nesbitt.rocks
+server: https://filebrowser.example.com
 # FileBrowser source name; WebDAV lives at <server>/dav/<source>/.
 source: data
 
