@@ -37,6 +37,6 @@ func openPath(target string) error {
 	if err := cmd.Start(); err != nil {
 		return err
 	}
-	go cmd.Wait()
+	go func() { _ = cmd.Wait() }()
 	return nil
 }

@@ -114,10 +114,10 @@ func inTriangle(x, y float64, a, b, c [2]float64) bool {
 // wrapICO packs a PNG into a single-image .ico (supported since Windows Vista).
 func wrapICO(pngData []byte) []byte {
 	var b bytes.Buffer
-	binary.Write(&b, binary.LittleEndian, [3]uint16{0, 1, 1})
-	b.Write([]byte{iconSize, iconSize, 0, 0})
-	binary.Write(&b, binary.LittleEndian, [2]uint16{1, 32})
-	binary.Write(&b, binary.LittleEndian, [2]uint32{uint32(len(pngData)), 22})
+	_ = binary.Write(&b, binary.LittleEndian, [3]uint16{0, 1, 1})
+	_ = b.Write([]byte{iconSize, iconSize, 0, 0})
+	_ = binary.Write(&b, binary.LittleEndian, [2]uint16{1, 32})
+	_ = binary.Write(&b, binary.LittleEndian, [2]uint32{uint32(len(pngData)), 22})
 	_, _ = b.Write(pngData)
 	return b.Bytes()
 }
